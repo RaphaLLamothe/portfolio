@@ -1131,6 +1131,10 @@
                                     const subject = "Contact Portfolio Raphaël Lamothe";
                                     let body = `${message}`;
 
+                                    if (phone !== "") {
+                                        body += phoneLine;
+                                    }
+
                                     const mailto = `mailto:raphael.lamothe.pro@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
                                     const link = document.getElementById("hidden-mailgo-link");

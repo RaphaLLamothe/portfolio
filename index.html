@@ -124,7 +124,7 @@
                                     </div>
                                 </div>
                                 <ul class="ul-reset social-icons wow fadeInLeft" data-wow-delay="1.6s">
-                                    <li><a href="https://www.linkedin.com/in/rapha%C3%ABl-lamothe-65162929b/" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a></li>
+                                    <li><a href="https://www.linkedin.com/in/rapha%C3%ABl-lamothe/" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a></li>
                                     <li><a href="https://github.com/RaphaLLamothe" target="_blank"><i class="fa-brands fa-github"></i></a></li>
                                 </ul>
                             </div>
@@ -1123,9 +1123,6 @@
                                     const email = document.getElementById('email').value;
                                     const message = document.getElementById('message').value;
 
-                                    if (localStorage.getItem('lang') === "en" && phone.startsWith("0")) {
-                                        phone = phone.substring(1);
-                                    }
                                     const phoneLine =
                                     localStorage.getItem('lang') === "fr"
                                         ? `\n\nInformations renseignées :\n Téléphone : ${phone}\n Adresse mail : ${email}`
@@ -1133,10 +1130,6 @@
 
                                     const subject = "Contact Portfolio Raphaël Lamothe";
                                     let body = `${message}`;
-
-                                    if (phone !== "") {
-                                        body += phoneLine;
-                                    }
 
                                     const mailto = `mailto:raphael.lamothe.pro@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 

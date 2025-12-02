@@ -23,12 +23,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function updateLanguage(lang) {
 
-        //Modification du texte en général
         document.querySelectorAll('[data-en]').forEach(el => {
             el.textContent = el.getAttribute(`data-${lang}`);
         });
 
-        //Modification de la légende des images
         document.querySelectorAll('img[data-en]').forEach(img => {
             img.alt = img.getAttribute(`data-${lang}`);
         });

@@ -264,9 +264,10 @@ a h6:hover {
     display: inline-block;
 }
 .cv-btn {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: 8px;
+	white-space: nowrap;
 }
 .cv-arrow {
     transition: transform 0.3s ease;
@@ -275,12 +276,18 @@ a h6:hover {
 .cv-dropdown-panel {
     display: none;
     position: absolute;
-	transform: translateX(22px);
     top: 100%;
+	left: 50%;
+	transform: translateX(-50%);
     background: white;
-    min-width: 212px;
+
+	width: max-content;
+	min-width: 80%;
+
 	border-bottom-left-radius: 6px;
     border-bottom-right-radius: 6px;
+
+	overflow: hidden;
 }
 .cv-dropdown-panel a {
     display: block;
@@ -291,8 +298,7 @@ a h6:hover {
 	border-bottom: 1px solid #000;
 }
 .cv-dropdown-panel a:last-child {
-    border-bottom-left-radius: 6px;
-    border-bottom-right-radius: 6px;
+    border-bottom: none;
 }
 .cv-dropdown-panel a:hover {
     background-color: #0d6efd;

@@ -42,6 +42,15 @@ document.addEventListener("DOMContentLoaded", () => {
                 a.href = cv.href;
                 a.download = "";
                 a.textContent = cv.text;
+
+                //Remove this code when English CVs will be available
+                if (lang === "en") {
+                    a.addEventListener("click", (e) => {
+                        e.preventDefault();
+                        alert("English CVs are currently unavailable.");
+                    });
+                }
+
                 cvPanel.appendChild(a);
             });
         }

@@ -486,6 +486,9 @@
 
 /* Mobile Devices */
 @media only screen and (max-width: 767px) {
+	.my-class-one{
+		justify-content: center !important;
+	}
 	.progress-wrap {
 		right: 20px;
 		bottom: 20px;
@@ -592,6 +595,7 @@
 	}
 	.hero-image-box {
 		margin: 30px 0;
+		display: none !important;
 	}
 	.hero-image-box img {
 		max-width: 80%;

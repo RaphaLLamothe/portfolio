@@ -304,10 +304,6 @@ a h6:hover {
     background-color: #0d6efd;
     color: white;
 }
-/* .cv-dropdown-panel a:first-child:hover {
-    border-top-left-radius: 6px;
-    border-top-right-radius: 6px;
-} */
 .cv-dropdown-panel a:last-child:hover {
     border-bottom-left-radius: 6px;
     border-bottom-right-radius: 6px;
@@ -721,8 +717,8 @@ body.loaded {
 	position: absolute;
 	cursor: pointer;
 	inset: 0;
-	background-color: #ccc;
-		border-radius: 34px;
+	background-color: #007bff;
+	border-radius: 34px;
 	transition: 0.4s;
 }
 
@@ -912,7 +908,7 @@ input:checked + .slider:before {
 	transform-origin: center center;
 	transform: rotate(0deg);
 	cursor: pointer;
-	transition: transform 300ms ease;
+	transition: transform 250ms ease;
 }
 .tj-header-area .menu-bar button span {
 	height: 3px;
@@ -3128,9 +3124,6 @@ blockquote cite::before {
 .social-icons li {
 	margin-right: 20px;
 }
-.social-icons li:last-child {
-	margin-right: 0;
-}
 .social-icons li a {
 	color: var(--tj-white);
 	width: 35px;
@@ -3926,11 +3919,6 @@ body.absolute_header .breadcrumb_area {
     .about-stat-grid .about-stat-card {
         padding: 16px;
     }
-}
-
-
-.profile-content {
-    padding-left: 50px;
 }
 
 .profile-description .section-title {

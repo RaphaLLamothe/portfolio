@@ -5188,12 +5188,6 @@ body.modal-image-open {
     }
 }
 
-@media (min-width: 992px) {
-    .project-item {
-        width: 33.333%;
-    }
-}
-
 /* Modifications pour les cartes de projet */
 .projects-grid {
     display: flex;

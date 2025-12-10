@@ -252,7 +252,7 @@
 		padding: 130px 0 30px;
 	}
 	.hero-section .intro_text svg {
-		top: 40%;
+		top: 60%;
 	}
 	.hero-section .intro_text svg text {
 		font-size: 280px;
@@ -489,9 +489,15 @@
 	.my-class-one{
 		justify-content: center !important;
 	}
+	.second-col{
+		margin-top: 15px;
+	}
 	.progress-wrap {
 		right: 20px;
 		bottom: 20px;
+	}
+	.timeline-category-title.second-title{
+		margin-top: 50px;
 	}
 	h1 {
 		font-size: 40px;
@@ -578,7 +584,7 @@
 		padding: 130px 0 40px;
 	}
 	.hero-section .intro_text svg {
-		top: 25%;
+		top: 30%;
 		left: 50%;
 	}
 	.hero-section .intro_text svg text {
@@ -595,7 +601,6 @@
 	}
 	.hero-image-box {
 		margin: 30px 0;
-		display: none !important;
 	}
 	.hero-image-box img {
 		max-width: 80%;

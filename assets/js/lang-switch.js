@@ -24,12 +24,27 @@ document.addEventListener("DOMContentLoaded", () => {
     function updateLanguage(lang) {
 
         document.querySelectorAll('[data-en]').forEach(el => {
+        const tag = el.tagName;
+        if (!["INPUT", "TEXTAREA", "IMG", "BUTTON"].includes(tag)) {
             el.textContent = el.getAttribute(`data-${lang}`);
-        });
+        }
+    });
 
-        document.querySelectorAll('img[data-en]').forEach(img => {
-            img.alt = img.getAttribute(`data-${lang}`);
-        });
+    document.querySelectorAll('img[data-en]').forEach(img => {
+        img.alt = img.getAttribute(`data-${lang}`);
+    });
+
+    document.querySelectorAll('textarea[data-en]').forEach(ta => {
+        ta.placeholder = ta.getAttribute(`data-${lang}`);
+    });
+
+    document.querySelectorAll('input[data-en]').forEach(inp => {
+        inp.placeholder = inp.getAttribute(`data-${lang}`);
+    });
+
+    document.querySelectorAll('button[data-en]').forEach(btn => {
+        btn.textContent = btn.getAttribute(`data-${lang}`);
+    });
 
         if (cvBtnText) {
             cvBtnText.textContent = cvBtnText.dataset[lang];

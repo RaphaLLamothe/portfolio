@@ -295,16 +295,19 @@ a h6:hover {
     color: #222;
     text-decoration: none;
     transition: background 0.2s;
-	border: 1.5px solid #000;
+	border: 2px solid #4C6FFF;
 }
 .cv-dropdown-panel a:last-child {
     border-top: none;
 	border-bottom-left-radius: 6px;
 	border-bottom-right-radius: 6px;
 }
-.cv-dropdown-panel a:hover {
-    background-color: #0d6efd;
+.cv-dropdown-panel a:hover{
+	background-color: #0d6efd;
     color: white;
+	border: 2px solid #0d6efd;
+}
+.cv-dropdown-panel a:hover:last-child {
 	border-bottom-left-radius: 6px;
 	border-bottom-right-radius: 6px;
 }
@@ -2946,6 +2949,7 @@ blockquote cite::before {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.1);
     margin-bottom: 30px;
+	min-width: 400px;
 }
 
 .contact-input,
@@ -2975,15 +2979,14 @@ blockquote cite::before {
 }
 
 .contact-info-list {
-    padding-left: 0;
     list-style: none;
     margin-top: 30px;
+	margin-bottom: 30px;
+	min-width: 330px;
 }
 
 .contact-info-list li {
     margin-bottom: 30px;
-    padding-left: 70px;
-    position: relative;
 }
 
 .contact-info-list .icon-box {
@@ -2994,14 +2997,17 @@ blockquote cite::before {
     display: flex;
     align-items: center;
     justify-content: center;
-    position: absolute;
-    left: 0;
-    top: 0;
+	position: relative;
+    margin-right: 15px;
 }
 
-.contact-info-list .icon-box i {
+.contact-info-list .icon-box i::before {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     color: white;
-    font-size: 20px;
+    font-size: 25px;
 }
 
 .contact-info-list .text-box p {
@@ -3056,8 +3062,8 @@ blockquote cite::before {
     }
     
     .contact-info-list .icon-box {
-        width: 40px;
-        height: 40px;
+        width: 35px;
+        height: 35px;
     }
 }
 
@@ -4044,12 +4050,12 @@ body.absolute_header .breadcrumb_area {
 .timeline-item:not(:last-child)::after {
     content: '';
     position: absolute;
-    top: 56px; /* Position sous le point */
-    left: 10px; /* Centré sur la barre */
+    top: 56px;
+    left: 10px;
     width: 4px;
-    height: calc(100% - 24px); /* Hauteur ajustée pour s'arrêter avant le point suivant */
+    height: calc(100% - 24px);
     background: white;
-    z-index: 0; /* Placer la barre derrière les points */
+    z-index: 0; 
 }
 
 .timeline-category-title {
@@ -4057,14 +4063,12 @@ body.absolute_header .breadcrumb_area {
     font-size: 2.4rem;
     font-family: var(--tj-ff-heading);
     font-weight: var(--tj-fw-bold);
-    margin-bottom: 40px;
     padding-left: 40px;
 }
 
 .timeline-item {
     position: relative;
     padding: 20px 0 20px 40px;
-    margin-left: 20px;
 }
 
 /* Style des points */
@@ -5269,68 +5273,4 @@ body.modal-image-open {
     display: flex;
     justify-content: center;
     margin-top: 20px;
-}
-
-.work-in-progress {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 20px;
-    padding: 60px 40px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    border: 2px dashed rgba(255, 255, 255, 0.5);
-    backdrop-filter: blur(10px);
-}
-
-.work-in-progress-title {
-    font-size: 32px;
-    font-weight: var(--tj-fw-bold);
-    color: white;
-    margin-bottom: 20px;
-}
-
-.work-in-progress-text {
-    font-size: 18px;
-    color: rgba(255, 255, 255, 0.8);
-    line-height: 1.6;
-    margin: 0;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .universities-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-    
-    .university-card {
-        padding: 24px 20px;
-    }
-    
-    .university-photo {
-        height: 200px;
-    }
-    
-    .country-flag {
-        width: 48px;
-        height: 34px;
-        top: 12px;
-        right: 12px;
-        border-radius: 10px;
-        padding: 3px;
-    }
-    
-    .university-name {
-        font-size: 20px;
-    }
-    
-    .work-in-progress {
-        padding: 40px 20px;
-    }
-    
-    .work-in-progress-title {
-        font-size: 24px;
-    }
-    
-    .work-in-progress-text {
-        font-size: 16px;
-    }
 }

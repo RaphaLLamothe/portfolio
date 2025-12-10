@@ -249,7 +249,7 @@
 
 	/* hero section */
 	.hero-section {
-		padding: 130px 0 30px;
+		padding: 130px 0 40px;
 	}
 	.hero-section .intro_text svg {
 		top: 60%;
@@ -434,9 +434,13 @@
 		padding: 30px 20px;
 	}
 	.contact-info-list li {
-		padding-left: 65px;
+		padding-left: 0px;
 	}
 	.contact-info-list .text-box a {
+		font-size: 15px;
+	}
+
+	.contact-info-list .icon-box i::before {
 		font-size: 18px;
 	}
 
@@ -497,7 +501,7 @@
 		bottom: 20px;
 	}
 	.timeline-category-title.second-title{
-		margin-top: 50px;
+		margin-top: 20px;
 	}
 	h1 {
 		font-size: 40px;
@@ -852,6 +856,9 @@
 		padding-left: 65px;
 	}
 	.contact-info-list .text-box a {
+		font-size: 18px;
+	}
+	.contact-info-list .icon-box i::before {
 		font-size: 18px;
 	}
 

@@ -43,11 +43,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 a.download = "";
                 a.textContent = cv.text;
 
-                //Remove this code when English CVs will be available
+                //Remove this code when English resumes will be available
                 if (lang === "en") {
                     a.addEventListener("click", (e) => {
                         e.preventDefault();
-                        alert("English CVs are currently unavailable.");
+                        alert("English resumes are currently unavailable.");
                     });
                 }
 

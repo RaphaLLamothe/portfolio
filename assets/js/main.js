@@ -447,3 +447,35 @@ function filterProjects(element) {
 		behavior: 'smooth'
 	});
 }
+
+const container = document.querySelector('#contact-section .container');
+const contactList = container.querySelector('.contact-info-list');
+
+function updatePadding() {
+  const containerStyle = getComputedStyle(container);
+  const marginLeft = parseInt(containerStyle.marginLeft, 10);
+
+  let padding = 12; // padding minimal par défaut
+
+  if (marginLeft === 0) {
+    padding = 120;
+
+    // largeur totale de la liste incluant padding actuel
+    const listStyle = getComputedStyle(contactList);
+    const listWidth = contactList.offsetWidth - parseFloat(listStyle.paddingLeft) - parseFloat(listStyle.paddingRight);
+    const viewportWidth = window.innerWidth;
+
+    // Ajuste le padding si la liste dépasse le viewport
+    if (listWidth + 2 * padding > viewportWidth) {
+      padding = Math.max((viewportWidth - listWidth) / 2, 12);
+    }
+  }
+
+  // applique le padding symétrique
+  contactList.style.paddingLeft = `${padding}px`;
+  contactList.style.paddingRight = `${padding}px`;
+}
+
+// initialisation
+updatePadding();
+window.addEventListener('resize', updatePadding);

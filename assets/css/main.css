@@ -776,8 +776,8 @@ input:checked + .slider:before {
 	backdrop-filter: blur(0px);
 }
 .tj-header-area.header-2.sticky {
-	background-color: var(--tj-theme-accent-1); /* tj-theme-accent-1 avec transparence  rgba(26, 26, 85, 0.98) */
-	box-shadow: 0 4px 10px -5px var(--tj-theme-primary); /* Ombre portée avec tj-theme-primary */
+	background-color: var(--tj-theme-accent-1);
+	box-shadow: 0 4px 10px -5px var(--tj-theme-primary);
 	padding: 7px 0;
 	animation: fade 0.5s;
 	backdrop-filter: blur(10px);
@@ -790,7 +790,7 @@ input:checked + .slider:before {
 	animation: bounceInUp 1s;
 	animation-duration: 1s;
 	animation-fill-mode: forwards;
-	background: var(--tj-theme-secondary) !important; /* Fond uni d'origine */
+	background: var(--tj-theme-secondary) !important;
 	box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 	padding: 10px 0;
 }
@@ -801,11 +801,11 @@ input:checked + .slider:before {
 }
 
 .header-sticky.sticky-out .header-menu ul li a {
-	color: var(--tj-white); /* Couleur du texte d'origine */
+	color: var(--tj-white);
 }
 
 .header-sticky.sticky-out .header-info-list ul li a {
-	color: var(--tj-white); /* Couleur du texte d'origine */
+	color: var(--tj-white);
 }
 
 .tj-header-area .logo-box {
@@ -2981,11 +2981,11 @@ blockquote cite::before {
     list-style: none;
     margin-top: 30px;
 	margin-bottom: 30px;
-	min-width: 330px;
 }
 
 .contact-info-list li {
     margin-bottom: 30px;
+	min-width: 330px;
 }
 
 .contact-info-list .icon-box {
@@ -3076,7 +3076,7 @@ blockquote cite::before {
     }
     
     .contact-info-list li {
-        padding-left: 50px;
+        padding-left: 0px;
     }
     
     .contact-info-list .icon-box {
@@ -4490,14 +4490,6 @@ body.absolute_header .breadcrumb_area {
     padding: 0 20px;
 }
 
-/* Grille des projets */
-.portfolio-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 colonnes de taille égale */
-    gap: 30px; /* Espacement entre les cartes */
-    padding: 20px 0;
-}
-
 .portfolio-item {
     width: 100%;
     display: flex;
@@ -4638,55 +4630,6 @@ body.absolute_header .breadcrumb_area {
     font-size: 0.9em;
 }
 
-/* Responsive pour les écrans moyens */
-@media (max-width: 992px) {
-    .portfolio-grid {
-        grid-template-columns: repeat(2, 1fr); /* 2 cartes par ligne */
-    }
-}
-
-/* Responsive pour les petits écrans */
-@media (max-width: 576px) {
-    .portfolio-grid {
-        grid-template-columns: 1fr; /* 1 carte par ligne */
-    }
-    
-    .project-card {
-        height: auto; /* Hauteur automatique sur mobile */
-    }
-    
-    .project-card .image-box {
-        height: 200px; /* Hauteur réduite sur mobile */
-    }
-}
-
-@media (min-width: 992px) {
-    .portfolio-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 30px;
-    }
-    
-    .portfolio-item {
-        width: 100%;
-        max-width: 100%;
-        flex: 0 0 calc(33.333% - 20px);
-    }
-}
-
-@media (max-width: 991px) and (min-width: 768px) {
-    .portfolio-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 25px;
-    }
-}
-
-@media (max-width: 767px) {
-    .portfolio-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-}
-
 .project-card {
     height: 400px; /* Hauteur uniformisée */
     margin: 0; /* Suppression des marges parasites */
@@ -4726,27 +4669,6 @@ body.absolute_header .breadcrumb_area {
     justify-content: space-between;
     max-height: 130px; /* Réduction de 150px à 130px */
     overflow-y: auto;
-}
-
-/* Corrections responsive */
-@media (max-width: 1200px) {
-    .projects-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 768px) {
-    .projects-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .project-image {
-        height: 150px;
-    }
-    .project-info {
-        max-height: 100px; /* Réduction plus importante sur mobile */
-        padding: 10px 12px; /* Padding réduit */
-    }
 }
 
 /* Animations modales */
@@ -5181,20 +5103,6 @@ body.modal-image-open {
     padding: 15px;
 }
 
-@media (min-width: 768px) {
-    .project-item {
-        width: 50%;
-    }
-}
-
-/* Modifications pour les cartes de projet */
-.projects-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 30px;
-    justify-content: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
 .project-item {
     flex: 1 1 calc(33.333% - 20px);
     max-width: calc(33.333% - 20px);

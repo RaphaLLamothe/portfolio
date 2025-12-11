@@ -10,7 +10,7 @@
 }
 
 /* Extra Large Devices */
-@media only screen and (min-width: 1200px) and (max-width: 1399px) {
+@media only screen and (min-width: 1200px) and (max-width: 1400px) {
 	.tj-header-area .header-button {
 		margin-left: 35px;
 	}
@@ -41,7 +41,7 @@
 }
 
 /* Large Devices */
-@media only screen and (min-width: 992px) and (max-width: 1199px) {
+@media only screen and (min-width: 992px) and (max-width: 1200px) {
 	.services-section {
 		padding-top: 100px;
 		padding-bottom: 100px;
@@ -170,7 +170,7 @@
 }
 
 /* Tablet Devices */
-@media only screen and (min-width: 768px) and (max-width: 991px) {
+@media only screen and (min-width: 768px) and (max-width: 992px) {
 	.my-class-one{
 		justify-content: center !important;
 	}
@@ -489,7 +489,7 @@
 }
 
 /* Mobile Devices */
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 768px) {
 	.my-class-one{
 		justify-content: center !important;
 	}
@@ -853,15 +853,14 @@
 		margin-top: 50px;
 	}
 	.contact-info-list li {
-		padding-left: 65px;
+		padding-left: 0;
 	}
 	.contact-info-list .text-box a {
-		font-size: 18px;
+		font-size: 16px;
 	}
 	.contact-info-list .icon-box i::before {
-		font-size: 18px;
+		font-size: 16px;
 	}
-
 	/* footer */
 	.tj-footer-area {
 		padding: 60px 0 20px;

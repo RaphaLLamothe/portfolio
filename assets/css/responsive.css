@@ -373,7 +373,6 @@
 	.portfolio_navigation .navigation_item .project .nav_project .title {
 		font-size: 35px;
 	}
-
 	/* resume section */
 	.resume-section {
 		padding-top: 80px;
@@ -781,6 +780,23 @@
 		font-size: 20px;
 		line-height: 1;
 	}
+	.project-modal{
+		word-wrap: break-word;
+	}
+	.project-modal h2{
+		font-size: 28px !important;
+	}
+	.project-modal .modal-section{
+		margin-bottom: 0px !important;
+	}
+	.project-modal .modal-section ul{
+		margin-bottom: 0px !important;
+	}
+	.project-modal .modal-section .competences-tags{
+		margin-bottom: 0px !important;
+	}
+
+
 
 	/* resume section */
 	.resume-section {

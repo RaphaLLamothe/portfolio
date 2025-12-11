@@ -65,6 +65,19 @@
 			$(".header-menu").removeClass("opened");
 			$("body").removeClass("overflow-hidden");
 		});
+		$("#logo-link").on("click", function (e) {
+			e.preventDefault();
+
+			// Bloquer le logo si le menu est ouvert
+			if ($(".header-menu").hasClass("opened")) return;
+
+			// Scroll sans hash dans l’URL
+			document.querySelector("#intro").scrollIntoView({
+				behavior: "smooth"
+			});
+		});
+
+
 		/*------------------------------------------------------
   	/  OnePage Active Class
   	/------------------------------------------------------*/

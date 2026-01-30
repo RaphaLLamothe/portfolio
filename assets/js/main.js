@@ -1,124 +1,126 @@
 /***************************************************
 ==================== JS INDEX ======================
 ****************************************************
-// Data js
-// Sidebar Navigation
+// Smooth Scroll Without Hash
+// Data Attributes (BG Image & Color)
 // Sticky Header
 // Hamburger Menu
-// Scroll To Section
-// OnePage Active Class
-// Portfolio Filter
-// Portfolio Gallery Carousel
-// Testimonial Carousel
-// Nice Select
-// ALL Popup
-// Sidebar Hover BG Color
-// Services Hover BG
-// Portfolio Filter BG Color
-// Funfact
-// WoW Js
+// Portfolio Filter (Multi-selection)
+// Modal Image Viewer
+// Project Popup
+// Competence Cards Interaction
+// Contact Section Padding
+// Progress Bars Animation
+// WoW Animation
 ****************************************************/
+
 (function ($) {
 	"use strict";
+
 	/*------------------------------------------------------
-  /  Data js
-  /------------------------------------------------------*/
-	$("[data-bg-image]").each(function () {
-		$(this).css(
-			"background-image",
-			"url(" + $(this).attr("data-bg-image") + ")"
-		);
+	/ SMOOTH SCROLL WITHOUT HASH IN URL
+	/------------------------------------------------------*/
+	function smoothScrollTo(targetId) {
+		const target = document.querySelector(targetId);
+		if (target) {
+			target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+			// Empêche l'ajout du # dans l'URL
+			history.pushState(null, null, ' ');
+		}
+	}
+
+	// Gestion des liens de navigation (header + footer)
+	document.addEventListener('DOMContentLoaded', function() {
+		// Tous les liens de navigation avec href="#..."
+		document.querySelectorAll('a[href^="#"]').forEach(link => {
+			link.addEventListener('click', function(e) {
+				e.preventDefault();
+				const targetId = this.getAttribute('href');
+				if (targetId && targetId !== '#') {
+					smoothScrollTo(targetId);
+				}
+			});
+		});
+
+		// Logo link - scroll vers #intro
+		const logoLink = document.getElementById('logo-link');
+		if (logoLink) {
+			logoLink.addEventListener('click', function(e) {
+				e.preventDefault();
+				// Bloquer le logo si le menu est ouvert
+				if ($('.header-menu').hasClass('opened')) return;
+				smoothScrollTo('#intro');
+			});
+		}
 	});
+
+	/*------------------------------------------------------
+	/ DATA ATTRIBUTES
+	/------------------------------------------------------*/
+	$("[data-bg-image]").each(function () {
+		$(this).css("background-image", "url(" + $(this).attr("data-bg-image") + ")");
+	});
+
 	$("[data-bg-color]").each(function () {
 		$(this).css("background-color", $(this).attr("data-bg-color"));
 	});
-	$(document).ready(function ($) {
+
+	/*------------------------------------------------------
+	/ DOCUMENT READY
+	/------------------------------------------------------*/
+	$(document).ready(function () {
+
 		/*------------------------------------------------------
-  	/  Sticky Header
-  	/------------------------------------------------------*/
-	var lastScrollTop = 0;
-	$(window).scroll(function () {
-		var scroll = $(window).scrollTop();
-		if (scroll > 300) {
-			$(".tj-header-area.header-sticky").addClass("sticky");
-			$(".tj-header-area.header-sticky").removeClass("sticky-out");
-		} else if (scroll < lastScrollTop) {
-			if (scroll < 500) {
+		/ STICKY HEADER
+		/------------------------------------------------------*/
+		let lastScrollTop = 0;
+		$(window).scroll(function () {
+			const scroll = $(window).scrollTop();
+			if (scroll > 300) {
+				$(".tj-header-area.header-sticky").addClass("sticky");
+				$(".tj-header-area.header-sticky").removeClass("sticky-out");
+			} else if (scroll < lastScrollTop && scroll < 500) {
 				$(".tj-header-area.header-sticky").addClass("sticky-out");
 				$(".tj-header-area.header-sticky").removeClass("sticky");
+			} else {
+				$(".tj-header-area.header-sticky").removeClass("sticky");
 			}
-		} else {
-			$(".tj-header-area.header-sticky").removeClass("sticky");
+			lastScrollTop = scroll;
+		});
+
+		// Header 2 Sticky
+		const header = document.querySelector('.tj-header-area.header-2');
+		if (header) {
+			let lastScroll = 0;
+			window.addEventListener('scroll', () => {
+				const currentScroll = window.scrollY;
+				if (currentScroll > lastScroll && currentScroll > 50) {
+					header.classList.add('sticky');
+				} else if (currentScroll < lastScroll && currentScroll <= 50) {
+					header.classList.remove('sticky');
+				}
+				lastScroll = currentScroll;
+			});
 		}
-		lastScrollTop = scroll;
-	});
+
 		/*------------------------------------------------------
-  	/  Hamburger Menu
-  	/------------------------------------------------------*/
+		/ HAMBURGER MENU
+		/------------------------------------------------------*/
 		$(".menu-bar").on("click", function () {
 			$(".menu-bar").toggleClass("menu-bar-toggeled");
 			$(".header-menu").toggleClass("opened");
 			$("body").toggleClass("overflow-hidden");
 		});
+
 		$(".header-menu ul li a").on("click", function () {
 			$(".menu-bar").removeClass("menu-bar-toggeled");
 			$(".header-menu").removeClass("opened");
 			$("body").removeClass("overflow-hidden");
 		});
-		$("#logo-link").on("click", function (e) {
-			e.preventDefault();
-
-			// Bloquer le logo si le menu est ouvert
-			if ($(".header-menu").hasClass("opened")) return;
-
-			// Scroll sans hash dans l’URL
-			document.querySelector("#intro").scrollIntoView({
-				behavior: "smooth"
-			});
-		});
-
 
 		/*------------------------------------------------------
-  	/  OnePage Active Class
-  	/------------------------------------------------------*/
-		function onPageNav(switchName) {
-			const navSwitch = $(switchName);
-			const deductHeight = 60;
-			let navArr = [];
-			navSwitch.each(function (i) {
-				let navSwitchHref = $(this).attr("href");
-				let tgtOff = $(navSwitchHref).offset().top - deductHeight;
-				navArr.push([]);
-				navArr[i].switch = $(this);
-				navArr[i].tgtOff = tgtOff;
-			});
-			//        console.log(navArr);
-			$(window).scroll(function () {
-				for (let i = 0; i < navArr.length; i++) {
-					let scroll = $(window).scrollTop();
-					let tgtKey = navArr[i];
-					let tgtSwitch = tgtKey.switch;
-					let tgtOff = tgtKey.tgtOff;
-					if (scroll >= tgtOff) {
-						navSwitch.parent().removeClass("is-current");
-						tgtSwitch.parent().addClass("is-current");
-					} else {
-						tgtSwitch.parent().removeClass("is-current");
-					}
-				}
-			});
-		}
-		$(window).on("load resize", function () {
-			onPageNav(".side-navbar a");
-		});
-		$(".header-menu nav ul").onePageNav({
-			currentClass: "current-menu-ancestor",
-			changeHash: false,
-			easing: "swing",
-		});
-		/*------------------------------------------------------
-  	/  Portfolio Filter avec Multiselection
-  	/------------------------------------------------------*/
+		/ PORTFOLIO FILTER (Multi-selection avec Isotope)
+		/------------------------------------------------------*/
 		const $grid = $('.projects-grid').isotope({
 			itemSelector: '.project-item',
 			layoutMode: 'masonry',
@@ -127,41 +129,49 @@
 				gutter: 30
 			}
 		});
+
 		// Gestion des filtres
 		$('.filter-button-group').on('click', 'button', function() {
 			const $this = $(this);
 			const isAll = $this.data('filter') === '*';
+			
 			$this.toggleClass('tj-active-filter');
-			if(isAll) {
+			
+			if (isAll) {
 				$('.filter-button-group button').not(this).removeClass('tj-active-filter');
 			} else {
 				$('.filter-button-group button[data-filter="*"]').removeClass('tj-active-filter');
 			}
+			
 			const filters = [];
 			$('.tj-active-filter').each(function() {
 				filters.push($(this).data('filter').replace(' ', '.'));
 			});
-			if(filters.length === 0) {
+			
+			if (filters.length === 0) {
 				$('.filter-button-group button[data-filter="*"]').addClass('tj-active-filter');
 				filters.push('*');
 			}
+			
 			const filterValue = filters.length ? filters.join(', ') : '*';
 			$grid.isotope({ filter: filterValue });
 		});
+
 		// Réinitialisation après chargement
 		$(window).on('load', function() {
 			$grid.isotope('layout');
 		});
+
 		/*------------------------------------------------------
-  	/  ALL Popup
-  	/------------------------------------------------------*/
+		/ MODAL IMAGE VIEWER
+		/------------------------------------------------------*/
 		const unlockScroll = () => {
 			const doc = document.documentElement;
 			doc.style.removeProperty('overflow');
 			document.body.style.removeProperty('overflow');
 			document.body.style.removeProperty('margin-right');
-			document.body.classList.remove('mfp-helper');
-			document.body.classList.remove('modal-image-open');
+			document.body.classList.remove('mfp-helper', 'modal-image-open');
+			
 			requestAnimationFrame(() => {
 				doc.style.removeProperty('overflow');
 				document.body.style.removeProperty('overflow');
@@ -169,22 +179,20 @@
 				document.body.classList.remove('modal-image-open');
 			});
 		};
+
 		const modalImageViewer = (() => {
-			let viewer;
-			let viewerImage;
-			let viewerCaption;
+			let viewer, viewerImage, viewerCaption;
+
 			const closeViewer = () => {
-				if (!viewer || !viewer.classList.contains('is-active')) {
-					return;
-				}
+				if (!viewer || !viewer.classList.contains('is-active')) return;
 				viewer.classList.remove('is-active');
 				viewer.setAttribute('aria-hidden', 'true');
 				document.body.classList.remove('modal-image-open');
 			};
+
 			const ensureViewer = () => {
-				if (viewer) {
-					return viewer;
-				}
+				if (viewer) return viewer;
+
 				viewer = document.createElement('div');
 				viewer.className = 'modal-image-viewer';
 				viewer.setAttribute('aria-hidden', 'true');
@@ -197,33 +205,41 @@
 					</div>
 				`;
 				document.body.appendChild(viewer);
+
 				viewerImage = viewer.querySelector('.modal-image-viewer__img');
 				viewerCaption = viewer.querySelector('.modal-image-viewer__caption');
 				const closeButton = viewer.querySelector('.modal-image-viewer__close');
+
 				const handleClose = (event) => {
 					event.preventDefault();
 					closeViewer();
 				};
+
 				viewer.addEventListener('click', (event) => {
 					if (event.target === viewer || event.target.classList.contains('modal-image-viewer__backdrop')) {
 						event.preventDefault();
 						closeViewer();
 					}
 				});
+
 				closeButton.addEventListener('click', handleClose);
+
 				document.addEventListener('keydown', (event) => {
 					if (event.key === 'Escape' && viewer.classList.contains('is-active')) {
 						closeViewer();
 					}
 				});
+
 				viewer.addEventListener('transitionend', (event) => {
 					if (event.propertyName === 'opacity' && !viewer.classList.contains('is-active')) {
 						viewerImage.src = '';
 						viewerCaption.textContent = '';
 					}
 				});
+
 				return viewer;
 			};
+
 			const openViewer = (src, altText) => {
 				const target = ensureViewer();
 				viewerImage.src = src;
@@ -233,11 +249,14 @@
 				target.setAttribute('aria-hidden', 'false');
 				document.body.classList.add('modal-image-open');
 			};
+
 			return {
 				open: openViewer,
 				close: closeViewer
 			};
 		})();
+
+		// Attacher les événements aux images de galerie
 		document.querySelectorAll('.modal-gallery-item').forEach((item) => {
 			const img = item.querySelector('img');
 			if (!img) return;
@@ -250,11 +269,10 @@
 
 				tempImg.onload = () => {
 					const isVertical = tempImg.naturalHeight > tempImg.naturalWidth;
-
 					modalImageViewer.open(img.src, img.alt);
 
 					setTimeout(() => {
-						const viewerImg = document.querySelector('.modal-image-viewer img'); 
+						const viewerImg = document.querySelector('.modal-image-viewer img');
 						if (!viewerImg) return;
 
 						if (isVertical) {
@@ -273,6 +291,9 @@
 			});
 		});
 
+		/*------------------------------------------------------
+		/ PROJECT POPUP (Magnific Popup)
+		/------------------------------------------------------*/
 		$(".project-card").magnificPopup({
 			type: "inline",
 			fixedContentPos: true,
@@ -288,7 +309,6 @@
 					$.magnificPopup.close();
 				},
 				open: function() {
-					// Animation au scroll
 					$('.modal-gallery-item').each(function(i) {
 						$(this).delay(i * 150).animate({
 							opacity: 1,
@@ -314,43 +334,12 @@
 				}
 			}
 		});
-	});
-	$(window).on("load", function () {
+
 		/*------------------------------------------------------
-  	/  WoW Js
-  	/------------------------------------------------------*/
-		var wow = new WOW({
-			boxClass: "wow", // default
-			animateClass: "animated", // default
-			offset: 100, // default
-			mobile: true, // default
-			live: true, // default
-		});
-		wow.init();
-	});
-	document.addEventListener("DOMContentLoaded", function() {
-		const progressBars = document.querySelectorAll('.progress-bar');
-		progressBars.forEach(bar => {
-			const width = bar.getAttribute('aria-valuenow') + '%';
-			bar.style.setProperty('--progress-width', width);
-		});
-	});
-	// Header Sticky
-	const header = document.querySelector('.tj-header-area.header-2');
-	let lastScroll = 0;
-	window.addEventListener('scroll', () => {
-		const currentScroll = window.scrollY;
-		if (currentScroll > lastScroll && currentScroll > 50) {
-			// Scrolling down
-			header.classList.add('sticky');
-		} else if (currentScroll < lastScroll && currentScroll <= 50) {
-			// Scrolling up and at top
-			header.classList.remove('sticky');
-		}
-		lastScroll = currentScroll;
-	});
-	document.addEventListener('DOMContentLoaded', function() {
+		/ COMPETENCE CARDS INTERACTION
+		/------------------------------------------------------*/
 		const competenceCards = document.querySelectorAll('.competence-card');
+		
 		competenceCards.forEach(card => {
 			card.addEventListener('click', function(e) {
 				e.preventDefault();
@@ -361,31 +350,28 @@
 				});
 			});
 		});
+
 		document.addEventListener('click', function(e) {
 			if (!e.target.closest('.competence-card')) {
 				requestAnimationFrame(() => {
-					competenceCards.forEach(card => {
-						card.classList.remove('active');
-					});
+					competenceCards.forEach(card => card.classList.remove('active'));
 					updateCardStates();
 				});
 			}
 		});
+
 		function updateCardStates() {
 			const activeCards = document.querySelectorAll('.competence-card.active');
 			competenceCards.forEach(card => {
 				if (!card.classList.contains('active')) {
-					if (activeCards.length > 0) {
-						card.classList.add('mleave');
-					} else {
-						card.classList.remove('mleave');
-					}
+					card.classList.toggle('mleave', activeCards.length > 0);
 				} else {
 					card.classList.remove('mleave');
 				}
 			});
 		}
-		// Animation à l'apparition des cartes
+
+		// Animation à l'apparition
 		function animateCards() {
 			competenceCards.forEach((card, index) => {
 				requestAnimationFrame(() => {
@@ -396,49 +382,125 @@
 				});
 			});
 		}
-		// Initialisation des cartes
+
+		// Initialisation
 		competenceCards.forEach(card => {
 			card.style.opacity = '0';
 			card.style.transform = 'scale(0.9)';
 		});
-		// Déclenche l'animation initiale
+
 		setTimeout(animateCards, 300);
+
+		/*------------------------------------------------------
+		/ PROGRESS BARS ANIMATION
+		/------------------------------------------------------*/
+		const progressBars = document.querySelectorAll('.progress-bar');
+		progressBars.forEach(bar => {
+			const width = bar.getAttribute('aria-valuenow') + '%';
+			bar.style.setProperty('--progress-width', width);
+		});
+
+		/*------------------------------------------------------
+		/ CONTACT SECTION PADDING
+		/------------------------------------------------------*/
+		const contactContainer = document.querySelector('#contact-section .container');
+		const contactList = contactContainer?.querySelector('.contact-info-list');
+
+		function updatePadding() {
+			if (!contactContainer || !contactList) return;
+
+			const containerStyle = getComputedStyle(contactContainer);
+			const marginLeft = parseInt(containerStyle.marginLeft, 10);
+			let padding = 12;
+
+			if (marginLeft === 0) {
+				padding = 120;
+				const listStyle = getComputedStyle(contactList);
+				const listWidth = contactList.offsetWidth - parseFloat(listStyle.paddingLeft) - parseFloat(listStyle.paddingRight);
+				const viewportWidth = window.innerWidth;
+
+				if (listWidth + 2 * padding > viewportWidth) {
+					padding = Math.max((viewportWidth - listWidth) / 2, 12);
+				}
+			}
+
+			contactList.style.paddingLeft = `${padding}px`;
+			contactList.style.paddingRight = `${padding}px`;
+		}
+
+		if (contactContainer && contactList) {
+			updatePadding();
+			window.addEventListener('resize', updatePadding);
+		}
 	});
+
+	/*------------------------------------------------------
+	/ WOW ANIMATION ON LOAD
+	/------------------------------------------------------*/
+	$(window).on("load", function () {
+		const wow = new WOW({
+			boxClass: "wow",
+			animateClass: "animated",
+			offset: 100,
+			mobile: true,
+			live: true,
+		});
+		wow.init();
+	});
+
 })(jQuery);
+
+/*------------------------------------------------------
+/ HELPER FUNCTIONS (VANILLA JS)
+/------------------------------------------------------*/
+
+// Parse competence list from string
 const parseCompetenceList = (value = '') => value
 	.split(',')
 	.map(item => item.trim().toLowerCase())
 	.filter(Boolean);
 
+// Handle competence click from project cards
 function handleCompetenceClick(e) {
 	e.preventDefault();
 	e.stopPropagation();
+
 	const competencesAttr = e.currentTarget.dataset.competences;
 	if (!competencesAttr) {
 		console.error("Missing data-competences attribute.");
 		return;
 	}
+
 	const competenceSet = new Set(parseCompetenceList(competencesAttr));
-	if (!competenceSet.size) {
-		return;
-	}
+	if (!competenceSet.size) return;
+
 	const section = document.getElementById('competences-section');
 	if (!section) {
 		console.error("Section 'competences-section' not found.");
 		return;
 	}
+
 	section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
 	document.querySelectorAll('.competence-card').forEach(card => {
 		const title = card.querySelector('.competence-title')?.innerText.trim().toLowerCase() || '';
 		card.classList.toggle('active', competenceSet.has(title));
 	});
+
 	document.querySelectorAll('.project-card').forEach(projectCard => {
 		const projectCompetencesAttr = projectCard.dataset.competences;
-		const source = projectCompetencesAttr ? projectCompetencesAttr : Array.from(projectCard.querySelectorAll('.competence-tag')).map(tag => tag.innerText);
-		const projectCompetences = Array.isArray(source) ? source.map(item => item.trim().toLowerCase()).filter(Boolean) : parseCompetenceList(source);
+		const source = projectCompetencesAttr 
+			? projectCompetencesAttr 
+			: Array.from(projectCard.querySelectorAll('.competence-tag')).map(tag => tag.innerText);
+		
+		const projectCompetences = Array.isArray(source) 
+			? source.map(item => item.trim().toLowerCase()).filter(Boolean) 
+			: parseCompetenceList(source);
+		
 		const isActive = projectCompetences.some(label => competenceSet.has(label));
 		projectCard.classList.toggle('active', isActive);
 	});
+
 	setTimeout(() => {
 		document.querySelectorAll('.competence-card.active, .project-card.active').forEach(card => {
 			card.style.transform = 'translateY(0)';
@@ -447,48 +509,18 @@ function handleCompetenceClick(e) {
 	}, 500);
 }
 
+// Filter projects by category
 function filterProjects(element) {
-	// Récupère le filtre depuis l'attribut data-filter
 	const filter = element.getAttribute('data-filter');
-	// Active le filtre correspondant
 	const filterButton = document.querySelector(`.filter-button-group button[data-filter="${filter}"]`);
+	
 	if (filterButton) {
 		filterButton.click();
 	}
-	// Scroll vers la section projets
-	document.querySelector('#projects-section').scrollIntoView({
-		behavior: 'smooth'
-	});
+
+	// Smooth scroll to projects section
+	const projectsSection = document.querySelector('#projects-section');
+	if (projectsSection) {
+		projectsSection.scrollIntoView({ behavior: 'smooth' });
+	}
 }
-
-const container = document.querySelector('#contact-section .container');
-const contactList = container.querySelector('.contact-info-list');
-
-function updatePadding() {
-  const containerStyle = getComputedStyle(container);
-  const marginLeft = parseInt(containerStyle.marginLeft, 10);
-
-  let padding = 12; // padding minimal par défaut
-
-  if (marginLeft === 0) {
-    padding = 120;
-
-    // largeur totale de la liste incluant padding actuel
-    const listStyle = getComputedStyle(contactList);
-    const listWidth = contactList.offsetWidth - parseFloat(listStyle.paddingLeft) - parseFloat(listStyle.paddingRight);
-    const viewportWidth = window.innerWidth;
-
-    // Ajuste le padding si la liste dépasse le viewport
-    if (listWidth + 2 * padding > viewportWidth) {
-      padding = Math.max((viewportWidth - listWidth) / 2, 12);
-    }
-  }
-
-  // applique le padding symétrique
-  contactList.style.paddingLeft = `${padding}px`;
-  contactList.style.paddingRight = `${padding}px`;
-}
-
-// initialisation
-updatePadding();
-window.addEventListener('resize', updatePadding);

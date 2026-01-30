@@ -20,45 +20,54 @@ document.addEventListener("DOMContentLoaded", () => {
     const cvBtnText = document.getElementById('cvBtnText');
     const cvPanel = document.getElementById('cvDropdownPanel');
 
+    // Cache les sélecteurs pour éviter les requêtes DOM répétées
+    const elementsWithLang = document.querySelectorAll('[data-en]');
+    const imagesWithLang = document.querySelectorAll('img[data-en]');
+    const textareasWithLang = document.querySelectorAll('textarea[data-en]');
+    const inputsWithLang = document.querySelectorAll('input[data-en]');
+    const buttonsWithLang = document.querySelectorAll('button[data-en]');
 
     function updateLanguage(lang) {
+        // Utiliser les sélecteurs cachés
+        elementsWithLang.forEach(el => {
+            const tag = el.tagName;
+            if (!["INPUT", "TEXTAREA", "IMG", "BUTTON"].includes(tag)) {
+                el.textContent = el.getAttribute(`data-${lang}`);
+            }
+        });
 
-        document.querySelectorAll('[data-en]').forEach(el => {
-        const tag = el.tagName;
-        if (!["INPUT", "TEXTAREA", "IMG", "BUTTON"].includes(tag)) {
-            el.textContent = el.getAttribute(`data-${lang}`);
-        }
-    });
+        imagesWithLang.forEach(img => {
+            img.alt = img.getAttribute(`data-${lang}`);
+        });
 
-    document.querySelectorAll('img[data-en]').forEach(img => {
-        img.alt = img.getAttribute(`data-${lang}`);
-    });
+        textareasWithLang.forEach(ta => {
+            ta.placeholder = ta.getAttribute(`data-${lang}`);
+        });
 
-    document.querySelectorAll('textarea[data-en]').forEach(ta => {
-        ta.placeholder = ta.getAttribute(`data-${lang}`);
-    });
+        inputsWithLang.forEach(inp => {
+            inp.placeholder = inp.getAttribute(`data-${lang}`);
+        });
 
-    document.querySelectorAll('input[data-en]').forEach(inp => {
-        inp.placeholder = inp.getAttribute(`data-${lang}`);
-    });
-
-    document.querySelectorAll('button[data-en]').forEach(btn => {
-        btn.textContent = btn.getAttribute(`data-${lang}`);
-    });
+        buttonsWithLang.forEach(btn => {
+            btn.textContent = btn.getAttribute(`data-${lang}`);
+        });
 
         if (cvBtnText) {
             cvBtnText.textContent = cvBtnText.dataset[lang];
         }
 
         if (cvPanel) {
+            // Utiliser DocumentFragment pour réduire les reflows
+            const fragment = document.createDocumentFragment();
             cvPanel.innerHTML = "";
+            
             cvLinks[lang].forEach(cv => {
                 const a = document.createElement('a');
                 a.href = cv.href;
                 a.download = "";
                 a.textContent = cv.text;
 
-                //Remove this code when English resumes will be available
+                // TODO: Remove when English resumes available
                 if (lang === "en") {
                     a.addEventListener("click", (e) => {
                         e.preventDefault();
@@ -66,8 +75,10 @@ document.addEventListener("DOMContentLoaded", () => {
                     });
                 }
 
-                cvPanel.appendChild(a);
+                fragment.appendChild(a);
             });
+            
+            cvPanel.appendChild(fragment);
         }
     }
 

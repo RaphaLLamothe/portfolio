@@ -1616,8 +1616,15 @@ input:checked + .slider:before {
 	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
+.modal-gallery.vertical {
+	grid-template-columns: repeat(2, 1fr);
+	gap: 30px;
+}
+
 .modal-gallery.vertical img {
-	height: 1050px;
+	height: 450px;
+	object-fit: contain;
+	background: rgba(0, 0, 0, 0.05);
 }
 
 .modal-gallery.horizontal img {

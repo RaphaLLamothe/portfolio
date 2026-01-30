@@ -1,25 +1,51 @@
-/***************************************************
-==================== JS INDEX ======================
-****************************************************
-// Smooth Scroll Without Hash
-// Data Attributes (BG Image & Color)
-// Sticky Header
-// Hamburger Menu
-// Portfolio Filter (Multi-selection)
-// Modal Image Viewer
-// Project Popup
-// Competence Cards Interaction
-// Contact Section Padding
-// Progress Bars Animation
-// WoW Animation
-****************************************************/
+/**
+ * ================================================================
+ *  PORTFOLIO - MAIN JS
+ *  Organisé selon la structure de l'index.html
+ * ================================================================
+ *
+ *  TABLE DES MATIÈRES:
+ *  -------------------
+ *  1. NAVIGATION
+ *     1.1 Smooth Scroll
+ *     1.2 Logo Link
+ *
+ *  2. HEADER
+ *     2.1 Sticky Header
+ *     2.2 Hamburger Menu
+ *
+ *  3. COMPETENCES SECTION
+ *     3.1 Cards Interaction
+ *     3.2 Cards Animation
+ *
+ *  4. PROJECTS SECTION
+ *     4.1 Portfolio Filter (Isotope)
+ *     4.2 Project Popup (Magnific Popup)
+ *     4.3 Modal Image Viewer
+ *
+ *  5. CONTACT SECTION
+ *     5.1 Contact Padding
+ *
+ *  6. UTILITIES
+ *     6.1 Progress Bars Animation
+ *     6.2 WOW Animation
+ *
+ *  7. HELPER FUNCTIONS
+ *     7.1 Parse Competence List
+ *     7.2 Handle Competence Click
+ *     7.3 Filter Projects
+ *
+ * ================================================================
+ */
 
 (function ($) {
 	"use strict";
 
-	/*------------------------------------------------------
-	/ SMOOTH SCROLL WITHOUT HASH IN URL
-	/------------------------------------------------------*/
+	/* ================================================================
+	   1. NAVIGATION
+	   ================================================================ */
+
+	/* ----- 1.1 Smooth Scroll ----- */
 	function smoothScrollTo(targetId) {
 		const target = document.querySelector(targetId);
 		if (target) {
@@ -29,7 +55,6 @@
 		}
 	}
 
-	// Gestion des liens de navigation (header + footer)
 	document.addEventListener('DOMContentLoaded', function() {
 		// Tous les liens de navigation avec href="#..."
 		document.querySelectorAll('a[href^="#"]').forEach(link => {
@@ -42,7 +67,7 @@
 			});
 		});
 
-		// Logo link - scroll vers #intro
+		/* ----- 1.2 Logo Link ----- */
 		const logoLink = document.getElementById('logo-link');
 		if (logoLink) {
 			logoLink.addEventListener('click', function(e) {
@@ -54,25 +79,14 @@
 		}
 	});
 
-	/*------------------------------------------------------
-	/ DATA ATTRIBUTES
-	/------------------------------------------------------*/
-	$("[data-bg-image]").each(function () {
-		$(this).css("background-image", "url(" + $(this).attr("data-bg-image") + ")");
-	});
 
-	$("[data-bg-color]").each(function () {
-		$(this).css("background-color", $(this).attr("data-bg-color"));
-	});
+	/* ================================================================
+	   2. HEADER
+	   ================================================================ */
 
-	/*------------------------------------------------------
-	/ DOCUMENT READY
-	/------------------------------------------------------*/
 	$(document).ready(function () {
 
-		/*------------------------------------------------------
-		/ STICKY HEADER
-		/------------------------------------------------------*/
+		/* ----- 2.1 Sticky Header ----- */
 		let lastScrollTop = 0;
 		$(window).scroll(function () {
 			const scroll = $(window).scrollTop();
@@ -103,9 +117,7 @@
 			});
 		}
 
-		/*------------------------------------------------------
-		/ HAMBURGER MENU
-		/------------------------------------------------------*/
+		/* ----- 2.2 Hamburger Menu ----- */
 		$(".menu-bar").on("click", function () {
 			$(".menu-bar").toggleClass("menu-bar-toggeled");
 			$(".header-menu").toggleClass("opened");
@@ -118,9 +130,71 @@
 			$("body").removeClass("overflow-hidden");
 		});
 
-		/*------------------------------------------------------
-		/ PORTFOLIO FILTER (Multi-selection avec Isotope)
-		/------------------------------------------------------*/
+
+		/* ================================================================
+		   3. COMPETENCES SECTION
+		   ================================================================ */
+
+		/* ----- 3.1 Cards Interaction ----- */
+		const competenceCards = document.querySelectorAll('.competence-card');
+		
+		competenceCards.forEach(card => {
+			card.addEventListener('click', function(e) {
+				e.preventDefault();
+				e.stopPropagation();
+				requestAnimationFrame(() => {
+					this.classList.toggle('active');
+					updateCardStates();
+				});
+			});
+		});
+
+		document.addEventListener('click', function(e) {
+			if (!e.target.closest('.competence-card')) {
+				requestAnimationFrame(() => {
+					competenceCards.forEach(card => card.classList.remove('active'));
+					updateCardStates();
+				});
+			}
+		});
+
+		function updateCardStates() {
+			const activeCards = document.querySelectorAll('.competence-card.active');
+			competenceCards.forEach(card => {
+				if (!card.classList.contains('active')) {
+					card.classList.toggle('mleave', activeCards.length > 0);
+				} else {
+					card.classList.remove('mleave');
+				}
+			});
+		}
+
+		/* ----- 3.2 Cards Animation ----- */
+		function animateCards() {
+			competenceCards.forEach((card, index) => {
+				requestAnimationFrame(() => {
+					setTimeout(() => {
+						card.style.opacity = '1';
+						card.style.transform = 'scale(0.95)';
+					}, index * 100);
+				});
+			});
+		}
+
+		// Initialisation des cartes
+		competenceCards.forEach(card => {
+			card.style.opacity = '0';
+			card.style.transform = 'scale(0.9)';
+		});
+
+		setTimeout(animateCards, 300);
+
+
+		/* ================================================================
+		   4. PROJECTS SECTION
+		   ================================================================ */
+
+		/* ----- 4.1 Portfolio Filter (Isotope) ----- */
 		const $grid = $('.projects-grid').isotope({
 			itemSelector: '.project-item',
 			layoutMode: 'masonry',
@@ -162,9 +236,49 @@
 			$grid.isotope('layout');
 		});
 
-		/*------------------------------------------------------
-		/ MODAL IMAGE VIEWER
-		/------------------------------------------------------*/
+		/* ----- 4.2 Project Popup (Magnific Popup) ----- */
+		$(".project-card").magnificPopup({
+			type: "inline",
+			fixedContentPos: true,
+			fixedBgPos: true,
+			overflowY: "auto",
+			closeBtnInside: true,
+			preloader: false,
+			midClick: true,
+			removalDelay: 300,
+			mainClass: 'my-mfp-zoom-in',
+			callbacks: {
+				beforeOpen: function() {
+					$.magnificPopup.close();
+				},
+				open: function() {
+					$('.modal-gallery-item').each(function(i) {
+						$(this).delay(i * 150).animate({
+							opacity: 1,
+							transform: 'translateY(0)'
+						}, 400);
+					});
+				},
+				beforeClose: function() {
+					modalImageViewer.close();
+					const mfp = $.magnificPopup.instance;
+					if (mfp && mfp.wrap) {
+						mfp.wrap.css('pointer-events', 'none');
+					}
+					unlockScroll();
+				},
+				close: function() {
+					unlockScroll();
+					modalImageViewer.close();
+					const mfp = $.magnificPopup.instance;
+					if (mfp && mfp.wrap) {
+						mfp.wrap.css('pointer-events', '');
+					}
+				}
+			}
+		});
+
+		/* ----- 4.3 Modal Image Viewer ----- */
 		const unlockScroll = () => {
 			const doc = document.documentElement;
 			doc.style.removeProperty('overflow');
@@ -291,118 +405,12 @@
 			});
 		});
 
-		/*------------------------------------------------------
-		/ PROJECT POPUP (Magnific Popup)
-		/------------------------------------------------------*/
-		$(".project-card").magnificPopup({
-			type: "inline",
-			fixedContentPos: true,
-			fixedBgPos: true,
-			overflowY: "auto",
-			closeBtnInside: true,
-			preloader: false,
-			midClick: true,
-			removalDelay: 300,
-			mainClass: 'my-mfp-zoom-in',
-			callbacks: {
-				beforeOpen: function() {
-					$.magnificPopup.close();
-				},
-				open: function() {
-					$('.modal-gallery-item').each(function(i) {
-						$(this).delay(i * 150).animate({
-							opacity: 1,
-							transform: 'translateY(0)'
-						}, 400);
-					});
-				},
-				beforeClose: function() {
-					modalImageViewer.close();
-					const mfp = $.magnificPopup.instance;
-					if (mfp && mfp.wrap) {
-						mfp.wrap.css('pointer-events', 'none');
-					}
-					unlockScroll();
-				},
-				close: function() {
-					unlockScroll();
-					modalImageViewer.close();
-					const mfp = $.magnificPopup.instance;
-					if (mfp && mfp.wrap) {
-						mfp.wrap.css('pointer-events', '');
-					}
-				}
-			}
-		});
 
-		/*------------------------------------------------------
-		/ COMPETENCE CARDS INTERACTION
-		/------------------------------------------------------*/
-		const competenceCards = document.querySelectorAll('.competence-card');
-		
-		competenceCards.forEach(card => {
-			card.addEventListener('click', function(e) {
-				e.preventDefault();
-				e.stopPropagation();
-				requestAnimationFrame(() => {
-					this.classList.toggle('active');
-					updateCardStates();
-				});
-			});
-		});
+		/* ================================================================
+		   5. CONTACT SECTION
+		   ================================================================ */
 
-		document.addEventListener('click', function(e) {
-			if (!e.target.closest('.competence-card')) {
-				requestAnimationFrame(() => {
-					competenceCards.forEach(card => card.classList.remove('active'));
-					updateCardStates();
-				});
-			}
-		});
-
-		function updateCardStates() {
-			const activeCards = document.querySelectorAll('.competence-card.active');
-			competenceCards.forEach(card => {
-				if (!card.classList.contains('active')) {
-					card.classList.toggle('mleave', activeCards.length > 0);
-				} else {
-					card.classList.remove('mleave');
-				}
-			});
-		}
-
-		// Animation à l'apparition
-		function animateCards() {
-			competenceCards.forEach((card, index) => {
-				requestAnimationFrame(() => {
-					setTimeout(() => {
-						card.style.opacity = '1';
-						card.style.transform = 'scale(0.95)';
-					}, index * 100);
-				});
-			});
-		}
-
-		// Initialisation
-		competenceCards.forEach(card => {
-			card.style.opacity = '0';
-			card.style.transform = 'scale(0.9)';
-		});
-
-		setTimeout(animateCards, 300);
-
-		/*------------------------------------------------------
-		/ PROGRESS BARS ANIMATION
-		/------------------------------------------------------*/
-		const progressBars = document.querySelectorAll('.progress-bar');
-		progressBars.forEach(bar => {
-			const width = bar.getAttribute('aria-valuenow') + '%';
-			bar.style.setProperty('--progress-width', width);
-		});
-
-		/*------------------------------------------------------
-		/ CONTACT SECTION PADDING
-		/------------------------------------------------------*/
+		/* ----- 5.1 Contact Padding ----- */
 		const contactContainer = document.querySelector('#contact-section .container');
 		const contactList = contactContainer?.querySelector('.contact-info-list');
 
@@ -432,11 +440,23 @@
 			updatePadding();
 			window.addEventListener('resize', updatePadding);
 		}
-	});
 
-	/*------------------------------------------------------
-	/ WOW ANIMATION ON LOAD
-	/------------------------------------------------------*/
+
+		/* ================================================================
+		   6. UTILITIES
+		   ================================================================ */
+
+		/* ----- 6.1 Progress Bars Animation ----- */
+		const progressBars = document.querySelectorAll('.progress-bar');
+		progressBars.forEach(bar => {
+			const width = bar.getAttribute('aria-valuenow') + '%';
+			bar.style.setProperty('--progress-width', width);
+		});
+
+	}); // End Document Ready
+
+
+	/* ----- 6.2 WOW Animation ----- */
 	$(window).on("load", function () {
 		const wow = new WOW({
 			boxClass: "wow",
@@ -450,17 +470,18 @@
 
 })(jQuery);
 
-/*------------------------------------------------------
-/ HELPER FUNCTIONS (VANILLA JS)
-/------------------------------------------------------*/
 
-// Parse competence list from string
+/* ================================================================
+   7. HELPER FUNCTIONS (Vanilla JS - Global Scope)
+   ================================================================ */
+
+/* ----- 7.1 Parse Competence List ----- */
 const parseCompetenceList = (value = '') => value
 	.split(',')
 	.map(item => item.trim().toLowerCase())
 	.filter(Boolean);
 
-// Handle competence click from project cards
+/* ----- 7.2 Handle Competence Click ----- */
 function handleCompetenceClick(e) {
 	e.preventDefault();
 	e.stopPropagation();
@@ -509,7 +530,7 @@ function handleCompetenceClick(e) {
 	}, 500);
 }
 
-// Filter projects by category
+/* ----- 7.3 Filter Projects ----- */
 function filterProjects(element) {
 	const filter = element.getAttribute('data-filter');
 	const filterButton = document.querySelector(`.filter-button-group button[data-filter="${filter}"]`);

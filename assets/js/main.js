@@ -35,6 +35,9 @@
  *     7.2 Handle Competence Click
  *     7.3 Filter Projects
  *
+ *  8. CONTACT SECTION
+ *     8.1 Send Mail
+ *
  * ================================================================
  */
 
@@ -544,4 +547,36 @@ function filterProjects(element) {
 	if (projectsSection) {
 		projectsSection.scrollIntoView({ behavior: 'smooth' });
 	}
+}
+
+/* ================================================================
+   8. CONTACT SECTION
+   ================================================================ */
+
+/* ----- 8.1 Send Mail ----- */
+function sendMail(event) {
+	event.preventDefault();
+
+	const phone = document.getElementById('phone').value;
+	const email = document.getElementById('email').value;
+	const message = document.getElementById('message').value;
+
+	const phoneLine =
+		localStorage.getItem('lang') === "fr"
+			? `\n\nInformations renseignées :\n Téléphone : ${phone}\n Adresse mail : ${email}`
+			: `\n\nProvided information :\n Phone : ${phone}\n Email address : ${email}`;
+
+	const subject = "Contact Portfolio Raphaël Lamothe";
+	let body = `${message}`;
+
+	if (phone !== "") {
+		body += phoneLine;
+	}
+
+	const mailto = `mailto:raphael.lamothe.pro@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+	const link = document.getElementById("hidden-mailgo-link");
+	link.setAttribute("href", mailto);
+
+	link.click();
 }

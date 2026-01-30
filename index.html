@@ -14,12 +14,22 @@
     <link rel="apple-touch-icon" href="./assets/img/logoHeader.webp" />
     <link rel="shortcut icon" type="image/webp" href="./assets/img/logoHeader.webp" />
 
+    <!-- Preconnect pour les ressources externes -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+
+    <!-- Preload des ressources critiques -->
+    <link rel="preload" href="assets/img/me.webp" as="image">
+    <link rel="preload" href="assets/css/main.css" as="style">
+
     <!-- CSS here -->
-    <link rel="stylesheet" href="assets/css/animate.min.css">
+    <link rel="stylesheet" href="assets/css/animate.min.css" media="print" onload="this.media='all'">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.8/css/bootstrap.min.css" integrity="sha512-2bBQCjcnw658Lho4nlXJcc6WkV/UxpE/sAokbXPxQNGqmNdQrWqtw26Ns9kFF/yG792pKR1Sx8/Y1Lf1XN4GKA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="assets/css/flaticon_gerold.css">
-    <link rel="stylesheet" href="assets/css/magnific-popup.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" media="print" onload="this.media='all'" />
+    <link rel="stylesheet" href="assets/css/flaticon_gerold.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="assets/css/magnific-popup.css" media="print" onload="this.media='all'">
 
     <link rel="stylesheet" href="assets/css/main.css">
     <link rel="stylesheet" href="assets/css/responsive.css">
@@ -32,8 +42,8 @@
             <div class="row">
                 <div class="col-12 header-row">
                     <div class="logo-box">
-                        <a id="logo-link">
-                            <img src="assets/img/logoHeader.webp" alt="">
+                        <a id="logo-link" aria-label="Retour à l'accueil">
+                            <img src="assets/img/logoHeader.webp" alt="Logo Raphaël Lamothe" width="60" height="60">
                         </a>
                     </div>
                     <div class="header-info-list d-none d-md-inline-block">
@@ -51,19 +61,19 @@
                                 <li><a href="#competences-section" data-en="Skills" data-fr="Compétences">Skills</a></li>
                                 <li><a href="#projects-section" data-en="Projects" data-fr="Projets">Projects</a></li>
                                 <li><a href="#contact-section">Contact</a></li>
-                                <li class="lang-switch-item"><span><img src="assets/img/logo/royaume-uni.webp" alt="fr-lang"></span>
-                                <label class="switch">
-                                    <input type="checkbox" id="langSwitch">
+                                <li class="lang-switch-item"><span><img src="assets/img/logo/royaume-uni.webp" alt="English" width="24" height="24"></span>
+                                <label class="switch" aria-label="Changer de langue">
+                                    <input type="checkbox" id="langSwitch" aria-label="Changer la langue du site">
                                     <span class="slider"></span>
                                 </label>
-                                <span><img src="assets/img/logo/france.webp" alt="eng-lang"></span></li>
+                                <span><img src="assets/img/logo/france.webp" alt="Français" width="24" height="24"></span></li>
                             </ul>
                             </div>
                         </nav>
                     </div>
 
                     <div class="menu-bar d-lg-none">
-                        <button>
+                        <button aria-label="Ouvrir le menu de navigation">
                             <span></span>
                             <span></span>
                             <span></span>
@@ -95,8 +105,8 @@
                             </h1>
 
                             <div class="hero-image-box d-md-none text-center wow fadeInRight" data-wow-delay="1.3s">
-                                <a href="https://www.linkedin.com/in/rapha%C3%ABl-lamothe/" target="_blank" rel="noopener noreferrer">
-                                    <img src="assets/img/me.webp" alt="">
+                                <a href="https://www.linkedin.com/in/rapha%C3%ABl-lamothe/" target="_blank" rel="noopener noreferrer" aria-label="Profil LinkedIn de Raphaël Lamothe">
+                                    <img src="assets/img/me.webp" alt="Photo de Raphaël Lamothe" width="400" height="400">
                                 </a>
                             </div>
 
@@ -119,16 +129,16 @@
                                     </div>
                                 </div>
                                 <ul class="social-icons wow fadeInLeft" data-wow-delay="1.6s">
-                                    <li><a href="https://www.linkedin.com/in/rapha%C3%ABl-lamothe/" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin-in"></i></a></li>
-                                    <li><a href="https://github.com/RaphaLLamothe" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i></a></li>
+                                    <li><a href="https://www.linkedin.com/in/rapha%C3%ABl-lamothe/" target="_blank" rel="noopener noreferrer" aria-label="Profil LinkedIn"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a></li>
+                                    <li><a href="https://github.com/RaphaLLamothe" target="_blank" rel="noopener noreferrer" aria-label="Profil GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i></a></li>
                                 </ul>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6 d-none d-md-block">
                         <div class="hero-image-box text-center wow fadeInRight" data-wow-delay="1.5s">
-                            <a href="https://www.linkedin.com/in/rapha%C3%ABl-lamothe/" target="_blank" rel="noopener noreferrer">
-                                <img src="assets/img/me.webp" alt="">
+                            <a href="https://www.linkedin.com/in/rapha%C3%ABl-lamothe/" target="_blank" rel="noopener noreferrer" aria-label="Profil LinkedIn de Raphaël Lamothe">
+                                <img src="assets/img/me.webp" alt="Photo de Raphaël Lamothe" width="400" height="400">
                             </a>
                         </div>
                     </div>
@@ -143,7 +153,7 @@
                     <!-- Partie gauche : Photo -->
                     <div class="col-lg-5">
                         <div class="profile-photo-box text-center wow fadeInLeft" data-wow-delay=".3s">
-                            <img src="assets/img/me2.webp" alt="Photo de profil" class="img-fluid profile-image">
+                            <img src="assets/img/me2.webp" alt="Photo de profil de Raphaël Lamothe" class="img-fluid profile-image" width="500" height="500" loading="lazy">
                         </div>
                     </div>
 
@@ -446,10 +456,10 @@
                             <article class="project-item realise optimise collaborate">
                                 <div class="project-card modal-popup" data-mfp-src="#streetcomplete-project-details">
                                     <div class="project-image">
-                                        <img src="assets/img/portfolio-gallery/streetcomplete.webp" alt="StreetComplete">
+                                        <img src="assets/img/portfolio-gallery/streetcomplete.webp" alt="StreetComplete" width="400" height="200" loading="lazy">
                                         <div class="project-overlay">
-                                            <button class="project-link">
-                                                <i class="flaticon-plus"></i>
+                                            <button class="project-link" aria-label="Voir les détails du projet StreetComplete">
+                                                <i class="flaticon-plus" aria-hidden="true"></i>
                                             </button>
                                         </div>
                                     </div>
@@ -475,10 +485,10 @@
                             <article class="project-item realise optimise administer manage lead collaborate">
                                 <div class="project-card modal-popup" data-mfp-src="#flopedt-project-details">
                                     <div class="project-image">
-                                        <img src="assets/img/portfolio-gallery/flop.webp" alt="flop!EDT">
+                                        <img src="assets/img/portfolio-gallery/flop.webp" alt="flop!EDT" width="400" height="200" loading="lazy">
                                         <div class="project-overlay">
-                                            <button class="project-link">
-                                                <i class="flaticon-plus"></i>
+                                            <button class="project-link" aria-label="Voir les détails du projet flop!EDT">
+                                                <i class="flaticon-plus" aria-hidden="true"></i>
                                             </button>
                                         </div>
                                     </div>
@@ -507,10 +517,10 @@
                             <article class="project-item realise optimise manage lead">
                                 <div class="project-card modal-popup" data-mfp-src="#angular-project-details">
                                     <div class="project-image">
-                                        <img src="assets/img/portfolio-gallery/angular.webp" alt="Site Restaurant">
+                                        <img src="assets/img/portfolio-gallery/angular.webp" alt="Site Restaurant" width="400" height="200" loading="lazy">
                                         <div class="project-overlay">
-                                            <button class="project-link">
-                                                <i class="flaticon-plus"></i>
+                                            <button class="project-link" aria-label="Voir les détails du projet Angular">
+                                                <i class="flaticon-plus" aria-hidden="true"></i>
                                             </button>
                                         </div>
                                     </div>
@@ -537,10 +547,10 @@
                             <article class="project-item manage lead">
                                 <div class="project-card modal-popup" data-mfp-src="#sweetshops-project-details">
                                     <div class="project-image">
-                                        <img src="assets/img/portfolio-gallery/sweetshops.webp" alt="SweetShops">
+                                        <img src="assets/img/portfolio-gallery/sweetshops.webp" alt="SweetShops" width="400" height="200" loading="lazy">
                                         <div class="project-overlay">
-                                            <button class="project-link">
-                                                <i class="flaticon-plus"></i>
+                                            <button class="project-link" aria-label="Voir les détails du projet SweetShops">
+                                                <i class="flaticon-plus" aria-hidden="true"></i>
                                             </button>
                                         </div>
                                     </div>
@@ -569,10 +579,10 @@
                             <article class="project-item realise">
                                 <div class="project-card modal-popup" data-mfp-src="#dailybank-project-details">
                                     <div class="project-image">
-                                        <img src="assets/img/portfolio-gallery/dailybank.webp" alt="DailyBank">
+                                        <img src="assets/img/portfolio-gallery/dailybank.webp" alt="DailyBank" width="400" height="200" loading="lazy">
                                         <div class="project-overlay">
-                                            <button class="project-link">
-                                                <i class="flaticon-plus"></i>
+                                            <button class="project-link" aria-label="Voir les détails du projet DailyBank">
+                                                <i class="flaticon-plus" aria-hidden="true"></i>
                                             </button>
                                         </div>
                                     </div>
@@ -598,10 +608,10 @@
                             <article class="project-item realise optimise administer manage lead collaborate">
                                 <div class="project-card modal-popup" data-mfp-src="#videogame-project-details">
                                     <div class="project-image">
-                                        <img src="assets/img/portfolio-gallery/algia.webp" data-en="First world of the video game" data-fr="Premier monde du jeu vidéo" alt="First world of the video game">
+                                        <img src="assets/img/portfolio-gallery/algia.webp" data-en="First world of the video game" data-fr="Premier monde du jeu vidéo" alt="First world of the video game" width="400" height="200" loading="lazy">
                                         <div class="project-overlay">
-                                            <button class="project-link">
-                                                <i class="flaticon-plus"></i>
+                                            <button class="project-link" aria-label="Voir les détails du projet Jeu Vidéo">
+                                                <i class="flaticon-plus" aria-hidden="true"></i>
                                             </button>
                                         </div>
                                     </div>
@@ -651,10 +661,10 @@
                 <h3 class="modal-section-title" data-en="Project Gallery" data-fr="Galerie de projets">Project Gallery</h3>
                 <div class="modal-gallery vertical">
                     <div class="modal-gallery-item">
-                        <img src="assets/img/portfolio-gallery/streetcomplete1.webp" data-en="Example of quest display" data-fr="Exemple de l'affichage des quêtes" alt="Example of quest display">
+                        <img src="assets/img/portfolio-gallery/streetcomplete1.webp" data-en="Example of quest display" data-fr="Exemple de l'affichage des quêtes" alt="Example of quest display" loading="lazy">
                     </div>
                     <div class="modal-gallery-item">
-                        <img src="assets/img/portfolio-gallery/streetcomplete2.webp" data-en="Example of selected quest" data-fr="Exemple de quête une fois sélectionnée" alt="Example of selected quest">
+                        <img src="assets/img/portfolio-gallery/streetcomplete2.webp" data-en="Example of selected quest" data-fr="Exemple de quête une fois sélectionnée" alt="Example of selected quest" loading="lazy">
                     </div>
                 </div>
             </div>
@@ -723,7 +733,7 @@
                         <img src="assets/img/portfolio-gallery/flop1.webp" data-en="Teacher’s availability during a typical week" data-fr="Disponibilité d'un professeur durant une semaine type" alt="Teacher’s availability during a typical week">
                     </div>
                     <div class="modal-gallery-item">
-                        <img src="assets/img/portfolio-gallery/flop2.webp" data-en="Time scale created for the typical week component" data-fr="Echelle des horaires réalisée pour le composant d'une semaine type" alt="Time scale created for the typical week component">
+                        <img src="assets/img/portfolio-gallery/flop2.webp" data-en="Time scale created for the typical week component" data-fr="Echelle des horaires réalisée pour le composant d'une semaine type" alt="Time scale created for the typical week component" loading="lazy">
                     </div>
                 </div>
             </div>
@@ -794,10 +804,10 @@
                 <h3 class="modal-section-title" data-en="Project Gallery" data-fr="Galerie de projets">Project Gallery</h3>
                 <div class="modal-gallery horizontal">
                     <div class="modal-gallery-item">
-                        <img src="assets/img/portfolio-gallery/angular1.webp" alt="Dishes belonging to a menu" data-en="Dishes belonging to a menu" data-fr="Plats appartenant à un menu">
+                        <img src="assets/img/portfolio-gallery/angular1.webp" alt="Dishes belonging to a menu" data-en="Dishes belonging to a menu" data-fr="Plats appartenant à un menu" loading="lazy">
                     </div>
                     <div class="modal-gallery-item">
-                        <img src="assets/img/portfolio-gallery/angular2.webp" alt="Menus availability" data-en="Menus availability" data-fr="Disponibilité des menus">
+                        <img src="assets/img/portfolio-gallery/angular2.webp" alt="Menus availability" data-en="Menus availability" data-fr="Disponibilité des menus" loading="lazy">
                     </div>
                 </div>
             </div>
@@ -862,10 +872,10 @@
                 <h3 class="modal-section-title" data-en="Project Gallery" data-fr="Galerie de projets">Project Gallery</h3>
                 <div class="modal-gallery horizontal">
                     <div class="modal-gallery-item">
-                        <img src="assets/img/portfolio-gallery/sweetshops1.webp" data-en="Example of a sold candy and its associated options" data-fr="Exemple d'un bonbon vendu et des options associées" alt="Example of a sold candy and its associated options">
+                        <img src="assets/img/portfolio-gallery/sweetshops1.webp" data-en="Example of a sold candy and its associated options" data-fr="Exemple d'un bonbon vendu et des options associées" alt="Example of a sold candy and its associated options" loading="lazy">
                     </div>
                     <div class="modal-gallery-item">
-                        <img src="assets/img/portfolio-gallery/sweetshops2.webp" data-en="Database associated with the candy website" data-fr="Base de données associée au site de bonbons" alt="Database associated with the candy website">
+                        <img src="assets/img/portfolio-gallery/sweetshops2.webp" data-en="Database associated with the candy website" data-fr="Base de données associée au site de bonbons" alt="Database associated with the candy website" loading="lazy">
                     </div>
                 </div>
             </div>
@@ -937,10 +947,10 @@
                 <h3 class="modal-section-title" data-en="Project Gallery" data-fr="Galerie de projets">Project Gallery</h3>
                 <div class="modal-gallery horizontal">
                     <div class="modal-gallery-item">
-                        <img src="assets/img/portfolio-gallery/dailybank1.webp" data-en="View of automatic withdrawal management" data-fr="Vue de la gestion des prélèvements automatiques" alt="View of automatic withdrawal management">
+                        <img src="assets/img/portfolio-gallery/dailybank1.webp" data-en="View of automatic withdrawal management" data-fr="Vue de la gestion des prélèvements automatiques" alt="View of automatic withdrawal management" loading="lazy">
                     </div>
                     <div class="modal-gallery-item">
-                        <img src="assets/img/portfolio-gallery/dailybank2.webp" data-en="View of bank employee management" data-fr="Vue de la gestion des employés de la banque" alt="View of bank employee management">
+                        <img src="assets/img/portfolio-gallery/dailybank2.webp" data-en="View of bank employee management" data-fr="Vue de la gestion des employés de la banque" alt="View of bank employee management" loading="lazy">
                     </div>
                 </div>
             </div>
@@ -1004,10 +1014,10 @@
                 <h3 class="modal-section-title" data-en="Project Gallery" data-fr="Galerie de projets">Project Gallery</h3>
                 <div class="modal-gallery horizontal">
                     <div class="modal-gallery-item">
-                        <img src="assets/img/portfolio-gallery/algia1.webp" data-en="First boss of the video game" data-fr="Premier boss du jeu vidéo" alt="First boss of the video game">
+                        <img src="assets/img/portfolio-gallery/algia1.webp" data-en="First boss of the video game" data-fr="Premier boss du jeu vidéo" alt="First boss of the video game" loading="lazy">
                     </div>
                     <div class="modal-gallery-item">
-                        <img src="assets/img/portfolio-gallery/algia2.webp" data-en="Zoom on a level of the game" data-fr="Zoom sur un niveau du jeu" alt="Zoom on a level of the game">
+                        <img src="assets/img/portfolio-gallery/algia2.webp" data-en="Zoom on a level of the game" data-fr="Zoom sur un niveau du jeu" alt="Zoom on a level of the game" loading="lazy">
                     </div>
                 </div>
             </div>
@@ -1075,16 +1085,19 @@
                                     <div class="row gx-3">
                                         <div class="col-sm-6">
                                             <div class="form_group">
-                                                <input type="email" name="email" id="email" placeholder="Email address" data-en="Email address" data-fr="Adresse mail" class="contact-input" required>
+                                                <label for="email" class="visually-hidden">Email address</label>
+                                                <input type="email" name="email" id="email" placeholder="Email address" data-en="Email address" data-fr="Adresse mail" class="contact-input" required autocomplete="email">
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form_group">
-                                                <input type="tel" name="phone" id="phone" placeholder="Phone number" data-en="Phone number" data-fr="N° de téléphone" class="contact-input">
+                                                <label for="phone" class="visually-hidden">Phone number</label>
+                                                <input type="tel" name="phone" id="phone" placeholder="Phone number" data-en="Phone number" data-fr="N° de téléphone" class="contact-input" autocomplete="tel">
                                             </div>
                                         </div>
                                         <div class="col-12">
                                             <div class="form_group">
+                                                <label for="message" class="visually-hidden">Your message</label>
                                                 <textarea name="message" id="message" placeholder="Your message" data-en="Your message" data-fr="Votre message" class="contact-textarea" required></textarea>
                                             </div>
                                         </div>
@@ -1174,7 +1187,7 @@
             <div class="row">
                 <div class="col-md-12 text-center">
                     <div class="footer-logo-box">
-                        <a href="#"><img src="assets/img/logoHeader.webp" alt=""></a>
+                        <a href="#" aria-label="Retour en haut de la page"><img src="assets/img/logoHeader.webp" alt="Logo Raphaël Lamothe" width="75" height="75"></a>
                     </div>
                     <div class="footer-menu">
                         <nav>
@@ -1196,19 +1209,15 @@
     </footer>
     <!-- FOOTER AREA END -->
 
-    <!-- CSS here -->
-    <script src="assets/js/jquery.min.js"></script>
-
-
-    <script src="assets/js/wow.min.js"></script>
-    <script src="assets/js/isotope.pkgd.min.js"></script>
-    <script src="assets/js/magnific-popup.js"></script>
-    <script src="assets/js/lang-switch.js"></script>
-    <script src="assets/js/multiple-cv.js"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/mailgo@0.12.1/dist/mailgo.min.js"></script>
-
-    <script src="assets/js/main.js"></script>
+    <!-- Scripts avec defer pour ne pas bloquer le rendu -->
+    <script src="assets/js/jquery.min.js" defer></script>
+    <script src="assets/js/wow.min.js" defer></script>
+    <script src="assets/js/isotope.pkgd.min.js" defer></script>
+    <script src="assets/js/magnific-popup.js" defer></script>
+    <script src="assets/js/lang-switch.js" defer></script>
+    <script src="assets/js/multiple-cv.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/mailgo@0.12.1/dist/mailgo.min.js" defer></script>
+    <script src="assets/js/main.js" defer></script>
 </body>
 
 </html>

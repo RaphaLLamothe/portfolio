@@ -1924,10 +1924,13 @@ input:checked + .slider::before {
 	}
 }
 
-/* WOW Animations override for this theme */
+/* WOW Animations - éléments cachés par défaut, rendus visibles par WOW.js */
 .wow {
-	opacity: 1;
-	transform: none;
+	visibility: hidden;
+}
+
+.wow.animated {
+	visibility: visible;
 }
 
 /* Lazy loading */

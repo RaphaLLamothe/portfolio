@@ -237,6 +237,44 @@
 		// Réinitialisation après chargement
 		$(window).on('load', function() {
 			$grid.isotope('layout');
+			equalizeProjectCardHeights();
+		});
+
+		/* ----- 4.1.1 Égaliser la hauteur des project cards ----- */
+		function equalizeProjectCardHeights() {
+			const cards = document.querySelectorAll('.project-card');
+			if (cards.length === 0) return;
+
+			// Reset les hauteurs pour calculer la hauteur naturelle
+			cards.forEach(card => {
+				card.style.height = 'auto';
+			});
+
+			// Trouver la hauteur maximale
+			let maxHeight = 0;
+			cards.forEach(card => {
+				const height = card.offsetHeight;
+				if (height > maxHeight) {
+					maxHeight = height;
+				}
+			});
+
+			// Appliquer la hauteur maximale à toutes les cartes
+			cards.forEach(card => {
+				card.style.height = maxHeight + 'px';
+			});
+
+			// Recalculer le layout Isotope
+			$grid.isotope('layout');
+		}
+
+		// Recalculer lors du redimensionnement de la fenêtre
+		let resizeTimeout;
+		$(window).on('resize', function() {
+			clearTimeout(resizeTimeout);
+			resizeTimeout = setTimeout(function() {
+				equalizeProjectCardHeights();
+			}, 250);
 		});
 
 		/* ----- 4.2 Project Popup (Magnific Popup) ----- */

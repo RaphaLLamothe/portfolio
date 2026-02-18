@@ -20,6 +20,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const cvBtnText = document.getElementById('cvBtnText');
     const cvPanel = document.getElementById('cvDropdownPanel');
 
+    const cvLink = document.getElementById('cv-link');
+
     // Cache les sélecteurs pour éviter les requêtes DOM répétées
     const elementsWithLang = document.querySelectorAll('[data-en]');
     const imagesWithLang = document.querySelectorAll('img[data-en]');
@@ -51,6 +53,19 @@ document.addEventListener("DOMContentLoaded", () => {
         buttonsWithLang.forEach(btn => {
             btn.textContent = btn.getAttribute(`data-${lang}`);
         });
+
+        if (cvLink) {
+            if (lang === 'fr') {
+                cvLink.href = 'assets/pdf/CV_Raphaël_Lamothe.pdf';
+                cvLink.onclick = null;
+            } else {
+                cvLink.href = '#';
+                cvLink.onclick = (e) => {
+                    e.preventDefault();
+                    alert("English resume is currently unavailable.");
+                };
+            }
+        }
 
         if (cvBtnText) {
             cvBtnText.textContent = cvBtnText.dataset[lang];

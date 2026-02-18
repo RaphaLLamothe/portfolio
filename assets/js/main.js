@@ -197,15 +197,21 @@
 		   4. PROJECTS SECTION
 		   ================================================================ */
 
-		/* ----- 4.1 Portfolio Filter (Isotope) ----- */
-		const $grid = $('.projects-grid').isotope({
-			itemSelector: '.project-item',
-			layoutMode: 'masonry',
-			masonry: {
-				columnWidth: '.project-item',
-				gutter: 30
-			}
-		});
+		/* ----- 4.1 Portfolio Filter (CSS natif) ----- */
+		function applyFilter(filterValue) {
+			const items = document.querySelectorAll('.project-item');
+			items.forEach(item => {
+				if (filterValue === '*') {
+					item.style.display = '';
+				} else {
+					// filterValue peut être une liste : ".cat1, .cat2"
+					const filters = filterValue.split(',').map(f => f.trim());
+					const matches = filters.some(f => item.matches(f));
+					item.style.display = matches ? '' : 'none';
+				}
+			});
+			equalizeProjectCardHeights();
+		}
 
 		// Gestion des filtres
 		$('.filter-button-group').on('click', 'button', function() {
@@ -231,26 +237,28 @@
 			}
 			
 			const filterValue = filters.length ? filters.join(', ') : '*';
-			$grid.isotope({ filter: filterValue });
+			applyFilter(filterValue);
 		});
 
-		// Réinitialisation après chargement
+		// Initialisation au chargement
 		$(window).on('load', function() {
-			$grid.isotope('layout');
 			equalizeProjectCardHeights();
 		});
 
 		/* ----- 4.1.1 Égaliser la hauteur des project cards ----- */
 		function equalizeProjectCardHeights() {
-			const cards = document.querySelectorAll('.project-card');
-			if (cards.length === 0) return;
+			// Uniquement les cartes visibles
+			const items = document.querySelectorAll('.project-item:not([style*="display: none"])');
+			if (items.length === 0) return;
+
+			const cards = Array.from(items).map(item => item.querySelector('.project-card')).filter(Boolean);
 
 			// Reset les hauteurs pour calculer la hauteur naturelle
 			cards.forEach(card => {
 				card.style.height = 'auto';
 			});
 
-			// Trouver la hauteur maximale
+			// Trouver la hauteur maximale parmi les cartes visibles
 			let maxHeight = 0;
 			cards.forEach(card => {
 				const height = card.offsetHeight;
@@ -259,13 +267,10 @@
 				}
 			});
 
-			// Appliquer la hauteur maximale à toutes les cartes
+			// Appliquer la hauteur maximale à toutes les cartes visibles
 			cards.forEach(card => {
 				card.style.height = maxHeight + 'px';
 			});
-
-			// Recalculer le layout Isotope
-			$grid.isotope('layout');
 		}
 
 		// Recalculer lors du redimensionnement de la fenêtre
@@ -278,6 +283,8 @@
 		});
 
 		/* ----- 4.2 Project Popup (Magnific Popup) ----- */
+		let savedScrollY = 0;
+
 		$(".project-card").magnificPopup({
 			type: "inline",
 			fixedContentPos: true,
@@ -291,6 +298,7 @@
 			callbacks: {
 				beforeOpen: function() {
 					$.magnificPopup.close();
+					savedScrollY = window.scrollY || document.documentElement.scrollTop;
 				},
 				open: function() {
 					$('.modal-gallery-item').each(function(i) {
@@ -306,15 +314,14 @@
 					if (mfp && mfp.wrap) {
 						mfp.wrap.css('pointer-events', 'none');
 					}
-					unlockScroll();
 				},
 				close: function() {
-					unlockScroll();
 					modalImageViewer.close();
 					const mfp = $.magnificPopup.instance;
 					if (mfp && mfp.wrap) {
 						mfp.wrap.css('pointer-events', '');
 					}
+					unlockScroll();
 				}
 			}
 		});

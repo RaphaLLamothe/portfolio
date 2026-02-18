@@ -125,15 +125,10 @@
                                 </div>
                             </div>
                             <div class="button-box">
-                                <div class="cv-dropdown wow fadeInLeft" data-wow-delay="1.5s">
-                                    <button class="btn tj-btn-secondary cv-btn" onclick="toggleCvDropdown()">
+                                <div class="wow fadeInLeft" data-wow-delay="1.5s">
+                                    <a id="cv-link" href="assets/pdf/CV_Raphaël_Lamothe.pdf" target="_blank" rel="noopener noreferrer" class="btn tj-btn-secondary">
                                         <span data-en="Download my resume" data-fr="Télécharger mon CV">Download my resume</span>
-                                        <span class="cv-arrow">&#9656;</span>
-                                    </button>
-
-                                    <div id="cvDropdownPanel" class="cv-dropdown-panel">
-                                        <!-- Les liens seront injectés ici par JS -->
-                                    </div>
+                                    </a>
                                 </div>
                                 <ul class="social-icons wow fadeInLeft" data-wow-delay="1.6s">
                                     <li><a href="https://www.linkedin.com/in/rapha%C3%ABl-lamothe/" target="_blank" rel="noopener noreferrer" aria-label="Profil LinkedIn"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a></li>
@@ -459,6 +454,35 @@
 
                         <div class="projects-grid wow fadeInUp" data-wow-delay=".6s">
 
+                            <!--Bomberman-->
+                            <article class="project-item realise optimise administer manage lead collaborate">
+                                <div class="project-card modal-popup" data-mfp-src="#bomberman-project-details">
+                                    <div class="project-image">
+                                        <img src="assets/img/portfolio-gallery/bomberman.webp" data-en="Game menu" data-fr="Menu du jeu" alt="Game menu" width="400" height="200" loading="lazy">
+                                        <div class="project-overlay">
+                                            <button class="project-link" aria-label="Voir les détails du projet Bomberman">
+                                                <i class="flaticon-plus" aria-hidden="true"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="project-info">
+                                        <h3 class="project-title" data-en="Bomberman" data-fr="Bomberman">Bomberman</h3>
+                                        <div class="competences-tags">
+                                            <span class="competence-tag" data-en="Realise" data-fr="Réaliser">Realise</span>
+                                            <span class="competence-tag" data-en="Optimise" data-fr="Optimiser">Optimise</span>
+                                            <span class="competence-tag" data-en="Collaborate" data-fr="Collaborer">Collaborate</span>
+                                        </div>
+                                        <a href="#competences-section" 
+                                           class="competence-btn" 
+                                           data-competences="Realise,Optimise,Collaborate,Réaliser,Optimiser,Collaborer"
+                                           onclick="event.stopPropagation(); handleCompetenceClick(event);"
+                                           data-en="View associated skills" data-fr="Voir les compétences associées">
+                                            View associated skills
+                                        </a>
+                                    </div>
+                                </div>
+                            </article>
+
                             <!-- StreetComplete -->
                             <article class="project-item realise optimise collaborate">
                                 <div class="project-card modal-popup" data-mfp-src="#streetcomplete-project-details">
@@ -597,12 +621,10 @@
                                         <h3 class="project-title" data-en="Banking application" data-fr="Application bancaire">Banking application</h3>
                                         <div class="competences-tags">
                                             <span class="competence-tag" data-en="Realise" data-fr="Réaliser">Realise</span>
-                                            <span class="competence-tag" data-en="Lead" data-fr="Conduire">Lead</span>
-                                            <span class="competence-tag" data-en="Collaborate" data-fr="Collaborer">Collaborate</span>
                                         </div>
                                         <a href="#competences-section" 
                                            class="competence-btn" 
-                                           data-competences="Realise,Réaliser,Lead,Conduire,Collaborate,Collaborer"
+                                           data-competences="Realise,Réaliser"
                                            onclick="event.stopPropagation(); handleCompetenceClick(event);"
                                            data-en="View associated skills" data-fr="Voir les compétences associées">
                                             View associated skills
@@ -611,19 +633,19 @@
                                 </div>
                             </article>
 
-                            <!-- Jeu vidéo-->
+                            <!--Algia's Journey-->
                             <article class="project-item realise optimise administer manage lead collaborate">
-                                <div class="project-card modal-popup" data-mfp-src="#videogame-project-details">
+                                <div class="project-card modal-popup" data-mfp-src="#algia-project-details">
                                     <div class="project-image">
                                         <img src="assets/img/portfolio-gallery/algia.webp" data-en="First world of the video game" data-fr="Premier monde du jeu vidéo" alt="First world of the video game" width="400" height="200" loading="lazy">
                                         <div class="project-overlay">
-                                            <button class="project-link" aria-label="Voir les détails du projet Jeu Vidéo">
+                                            <button class="project-link" aria-label="Voir les détails du projet Algia's Journey">
                                                 <i class="flaticon-plus" aria-hidden="true"></i>
                                             </button>
                                         </div>
                                     </div>
                                     <div class="project-info">
-                                        <h3 class="project-title" data-en="Video Game" data-fr="Jeu vidéo">Video Game</h3>
+                                        <h3 class="project-title" data-en="Algia's Journey" data-fr="Algia's Journey">Algia's Journey</h3>
                                         <div class="competences-tags">
                                             <span class="competence-tag" data-en="Realise" data-fr="Réaliser">Realise</span>
                                             <span class="competence-tag" data-en="Optimise" data-fr="Optimiser">Optimise</span>
@@ -648,6 +670,76 @@
             </div>
         </section>
         <!-- PROJECTS SECTION END -->
+
+        <!-- Modal Bomberman -->
+        <div id="bomberman-project-details" class="project-modal mfp-hide">
+            <div class="modal-header">
+                <h2 data-en="Video Game 'Bomberman' - IUT Blagnac" data-fr="Jeu vidéo 'Bomberman' - IUT Blagnac">Video Game - IUT Blagnac</h2>
+            </div>
+            
+            <div class="modal-section">
+                <h3 class="modal-section-title">Description</h3>
+                <p class="project-team-info" data-en="Project completed in a group of 4" data-fr="Projet réalisé en groupe de 4 personnes">Project completed in a group of 4</p>
+                <p 
+                data-en="Creation of a Bomberman built on Godot Engine, with a multiplayer mode and various maps." 
+                data-fr="Création d'un Bomberman créé sur le moteur Godot Engine, avec un mode multijoueur et diverses cartes.">
+                Creation of a Bomberman built on Godot Engine, with a multiplayer mode and various maps.
+                </p>
+            </div>
+            
+            <div class="modal-section">
+                <h3 class="modal-section-title" data-en="Project Gallery" data-fr="Galerie de projets">Project Gallery</h3>
+                <div class="modal-gallery horizontal">
+                    <div class="modal-gallery-item">
+                        <img src="assets/img/portfolio-gallery/bomberman1.webp" data-en="Local multiplayer mode" data-fr="Mode multijoueur local" alt="Local multiplayer mode" width="800" height="450" loading="lazy">
+                    </div>
+                    <div class="modal-gallery-item">
+                        <img src="assets/img/portfolio-gallery/bomberman2.webp" data-en="Gameplay with upgrades and bomb explosions" data-fr="Gameplay avec des améliorations ainsi qu'une explosion de bombe" alt="Gameplay with upgrades and bomb explosions" width="800" height="450" loading="lazy">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="modal-grid-container">
+                <div class="modal-grid-column">
+                    <div class="modal-section higher">
+                        <h3 class="modal-section-title" data-en="Technologies Used" data-fr="Technologies utilisées">Technologies Used</h3>
+                        <ul>
+                            <li>Godot <i class="fa-solid fa-code tech-icon"></i></li>
+                            <li>Github <i class="fa-brands fa-github tech-icon"></i></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="modal-section">
+                        <h3 class="modal-section-title modal-skills-link" data-competences="Realise,Optimise,Administer,Manage,Lead,Collaborate" onclick="handleCompetenceClick(event); $.magnificPopup.close();" data-en="Skills Used" data-fr="Compétences utilisées">Skills Used</h3>
+                        <div class="competences-tags">
+                            <span class="competence-tag" data-en="Realise" data-fr="Réaliser">Realise</span>
+                            <span class="competence-tag" data-en="Optimise" data-fr="Optimiser">Optimise</span>
+                            <span class="competence-tag" data-en="Collaborate" data-fr="Collaborer">Collaborate</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="modal-grid-column">
+                    <div class="modal-section higher">
+                        <h3 class="modal-section-title" data-en="Key Features" data-fr="Éléments clés">Key Features</h3>
+                        <ul>
+                            <li data-en="Design of the various levels" data-fr="Design des différents niveaux">Design of the various levels</li>
+                            <li data-en="Creation of the game’s graphics" data-fr="Création des graphismes du jeu">Creation of the game’s graphics</li>
+                            <li data-en="Creation of the player and its features" data-fr="Création du joueur et de ses fonctionnalités">Creation of the player and its features</li>
+                            <li data-en="Creation of the different aliens in the game" data-fr="Création des différents aliens présents dans le jeu">Creation of the different aliens in the game</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="modal-section">
+                        <h3 class="modal-section-title" data-en="Source Code" data-fr="Code Source">Source Code</h3>
+                        <a href="https://github.com/HugoTHOLLON/Bomberman3D_IUT" target="_blank" class="github-link">
+                            <i class="fab fa-github"></i>
+                            <span data-en="View on Github" data-fr="Voir sur Github">View on Github</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- Modal StreetComplete -->
         <div id="streetcomplete-project-details" class="project-modal mfp-hide">
@@ -1001,8 +1093,8 @@
             </div>
         </div>
 
-        <!-- Modal Video game -->
-        <div id="videogame-project-details" class="project-modal mfp-hide">
+        <!-- Modal Algia -->
+        <div id="algia-project-details" class="project-modal mfp-hide">
             <div class="modal-header">
                 <h2 data-en="Video Game 'Algia' - EPITA" data-fr="Jeu vidéo 'Algia' - EPITA">Video Game - EPITA</h2>
             </div>
@@ -1194,7 +1286,6 @@
     <script src="assets/js/isotope.pkgd.min.js" defer></script>
     <script src="assets/js/magnific-popup.js" defer></script>
     <script src="assets/js/lang-switch.js" defer></script>
-    <script src="assets/js/multiple-cv.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/mailgo@0.12.1/dist/mailgo.min.js" defer></script>
     <script src="assets/js/main.js" defer></script>
 </body>
